@@ -17,8 +17,8 @@ services:
   - mysql:latest
 
 variables:
-  MYSQL_DATABASE: project_name
-  MYSQL_ROOT_PASSWORD: secret
+  MYSQL_DATABASE: vite-users
+  MYSQL_ROOT_PASSWORD: DDSnewpwd123!@#2022
 
 # This folder is cached between builds
 # https://docs.gitlab.com/ee/ci/yaml/index.html#cache
@@ -26,6 +26,18 @@ cache:
   paths:
     - vendor/
     - node_modules/
+
+  db:
+    image: mysql:5.7
+    container_name: vite-users
+    restart: unless-stopped
+    environment:
+      MYSQL_DATABASE: vite-users
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_PASSWORD: DDSnewpwd123!@#2022
+      MYSQL_USER: root
+      SERVICE_TAGS: dev
+      SERVICE_NAME: mysql
 
 # This is a basic example for a gem or script which doesn't use
 # services such as redis or postgres
